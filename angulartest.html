@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<script src= "http://ajax.googleapis.com/ajax/libs/angularjs/1.3.14/angular.min.js"></script>
+<body>
+
+<div ng-app="myApp" ng-controller="customersCtrl"> 
+
+<ul>
+	<li ng-repeat="y in section"> {{ y.section }}
+		<ul>
+		  	<li ng-repeat="x in names"> {{ x.question }} </li>
+			  	<ul>
+			  		<li ng-repeat="x in names"> {{ x.answer }} </li>
+				</ul>
+		</ul>
+	</li>
+</ul>
+
+</div>
+<script>
+var app = angular.module('myApp', []);
+app.controller('customersCtrl', function($scope, $http) {
+  $http.get("http://api.maepaysoh.org/faq/list?token=c7e05e52-36b3-586c-abb2-113b3034a3aa")
+  .success(function (response) {$scope.names = response.data;});
+});
+app.controller('customersCtrl', function($scope, $http) {
+  $http.get("http://api.maepaysoh.org/faq/list?token=c7e05e52-36b3-586c-abb2-113b3034a3aa?section=Section")
+  .success(function (response) {$scope.section = response.data;});
+});
+
+
+
+
+</script>
+</body>
+</html>
